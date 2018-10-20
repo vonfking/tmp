@@ -1,0 +1,36 @@
+<nz-layout class="layout">
+  <nz-header >
+    <H1 class="title">UDS Maintainance Tool</H1>
+  </nz-header> 
+</nz-layout>
+<nz-layout style="height:100%">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzWidth]="260">
+    <div class="list-wrapper" *ngIf="!isCollapsed">
+        <nz-collapse nzAccordion>
+            <nz-collapse-panel *ngFor="let panel of panels" [nzHeader]="panel.name" [nzActive]="panel.active">
+              <nz-tree [nzData]="panel.treeData" (nzClick)="nzTreeClick($event)">
+              </nz-tree>
+            </nz-collapse-panel>
+          </nz-collapse>
+    </div>      
+  </nz-sider>
+  <nz-content class="container">
+    <nz-tabset [nzType]="'card'" [nzSelectedIndex]="selectedIndex" (nzSelectChange)="nzTabChange($event)">
+      <nz-tab [nzTitle]="homeTemplate">
+        <ng-template #homeTemplate>
+          <div>Home</div>
+        </ng-template>
+        <H1>Welcome to UDS Maintainance tool</H1>
+      </nz-tab>>
+      <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+        <ng-template #titleTemplate>
+          <div>
+            {{ tab }}
+            <i class="anticon anticon-close" (click)="closeTab(tab)"></i>
+          </div>
+        </ng-template>
+        <ng-template #tabContainer></ng-template>
+      </nz-tab>
+    </nz-tabset>
+  </nz-content>
+</nz-layout>

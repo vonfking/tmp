@@ -1,0 +1,58 @@
+<form nz-form (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="2" nzRequired nzFor="tenantid">TenantID</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input type="text" nz-input formControlName="tenantid" placeholder="Please input tenant id">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="2" nzFor="dsaid" >DSAID</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input type="text" nz-input formControlName="dsaid" placeholder="Please input dsa id">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="2" nzFor="search" ></nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <button nz-button (click)="Search()">Search</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<nz-table #nzTable [nzData]="dataSet" [nzPageSize]="50" [nzScroll]="{x: '1300px', y: '240px' }">
+  <thead>
+    <tr>
+      <th>TENANTID</th>
+      <th>NFID</th>
+      <th>DSAID</th>
+      <th>DSATYPE</th>
+      <th>NODEID</th>
+      <th>STATE</th>
+      <th>LOCAL</th>
+      <th>DST</th>
+      <th>SCHEMA</th>
+      <th>PROGRESS</th>
+      <th>CPU</th>
+      <th>MEM</th>
+      <th>CSN</th>
+      <th>SSN</th>          
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let x of nzTable.data">
+        <td>{{ x[0] }}</td>
+        <td>{{ x[1] }}</td>
+        <td>{{ x[2] }}</td>
+        <td>{{ x[3] }}</td>
+        <td>{{ x[4] }}</td>
+        <td>{{ x[5] }}</td>
+        <td>{{ x[6] }}</td>
+        <td>{{ x[7] }}</td>
+        <td>{{ x[8] }}</td>
+        <td>{{ x[9] }}</td>
+        <td>{{ x[10] }}</td>
+        <td>{{ x[11] }}</td>
+        <td>{{ x[12] }}</td>
+        <td>{{ x[13] }}</td>
+    </tr>
+  </tbody>
+</nz-table>
