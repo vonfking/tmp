@@ -4,10 +4,12 @@ import { MainComponent } from './main.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ShowdsaComponent } from './showdsa/showdsa.component';
 import { ShowdstComponent } from './showdst/showdst.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule,FormsModule,
+    ReactiveFormsModule,
     NgZorroAntdModule
   ],
   entryComponents: [ShowdsaComponent, ShowdstComponent],

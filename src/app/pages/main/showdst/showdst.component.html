@@ -1,3 +1,49 @@
-<p>
-  showdst works!
-</p>
+<nz-content style="background:#fff; padding: 24px; min-height: 500px;">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired nzFor="dstid">DSTID</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input id="dstid" type="text" nz-input formControlName="dstid">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzFor="dsaid" >DSAID</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input id="dsaid" type="text" nz-input formControlName="dsaid">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSpan]="12" [nzOffset]="5">
+        <button nz-button nzType="primary">Submit</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+<div class="search-result-list">
+      <nz-table #nzTable>
+          <thead nz-thead>
+              <tr>
+                  <th nz-th>
+                      <span>代码</span>
+                  </th>
+                  <th nz-th>
+                      <span>名称</span>
+                  </th>
+                  <th nz-th>
+                      <span>电话</span>
+                  </th>
+                  <th nz-th>
+                      <span>操作</span>
+                  </th>
+              </tr>
+          </thead>
+          <tbody nz-tbody>
+              <tr nz-tbody-tr *ngFor="let user of nzTable.data">
+                  <td nz-td>{{user.code}}</td>
+                  <td nz-td>{{user.name}}</td>
+                  <td nz-td>{{user.mobile}}</td>
+                  <td nz-td></td>
+              </tr>
+          </tbody>
+      </nz-table>
+</div>
+</nz-content>

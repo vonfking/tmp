@@ -15,15 +15,6 @@ export class MainComponent implements OnInit,OnDestroy  {
   }
   isCollapsed = false;
   selectedIndex = 0;
-  tabs = [];
-
-  closeTab(tab: string): void {
-    this.tabs.splice(this.tabs.indexOf(tab), 1);
-  }
-
-  newTab(): void {
-    this.tabs.push('New Tab');
-  }
 
   panels = [
     {
@@ -82,6 +73,26 @@ export class MainComponent implements OnInit,OnDestroy  {
       ]
     }
   ];
+  tabs = [];//[{"name":"Home", "init":true}];//{name, init}
+
+  addTab(tabName: string):number{
+    return this.tabs.push({"name":tabName, "init":false});
+  }
+  searchTab(tabName: string):number{
+    for (var _i=0; _i<this.tabs.length; _i++)
+    {
+      if (this.tabs[_i].name == tabName)
+      {
+        return _i;
+      }
+    }
+    return -1;
+  }
+  closeTab(tabName: string): void {
+    var _i=this.searchTab(tabName);
+    if (_i != -1)
+      this.tabs.splice(_i, 1);
+  }
   nzTreeClick(event: NzFormatEmitEvent): void {
     //console.log(event);
     if (event.eventName === 'click')
@@ -96,7 +107,7 @@ export class MainComponent implements OnInit,OnDestroy  {
         tabTitle = "DSTStatus"
       }
       if (tabTitle == "")return;
-      var index = this.tabs.indexOf(tabTitle);
+      var index = this.searchTab(tabTitle);
       if (index>=0)
       {
         this.selectedIndex = index+1;
@@ -104,8 +115,7 @@ export class MainComponent implements OnInit,OnDestroy  {
       }
       else
       {
-        index = this.tabs.push(tabTitle);
-        this.selectedIndex = index+1;
+        this.selectedIndex =  this.addTab(tabTitle);
         //this.createComponent(tabTitle);
       }      
     }
@@ -125,18 +135,23 @@ export class MainComponent implements OnInit,OnDestroy  {
   nzTabChange(event: NzTabChangeEvent):void{
     console.log(event);
     var index = event.index;
-    if (index==0)return;
+    if (index == 0)
+      return;
+    index = index - 1;
+    if (this.tabs[index].init)
+      return;
+    this.tabs[index].init = true;
     var tmp:ViewContainerRef
-    tmp = this.tabContainer.find(function(_element,i){return i==index-1});
+    tmp = this.tabContainer.find(function(_element,i){return i==index});
     console.log(tmp);
     tmp.clear();
-    if (index == 1)
+    if (this.tabs[index].name == "DSAStatus")
     {
       let factory: ComponentFactory<ShowdsaComponent> =
         this.resolver.resolveComponentFactory(ShowdsaComponent);
       tmp.createComponent(factory);
     }
-    else if (index == 2)
+    else if (this.tabs[index].name == "DSTStatus")
     {
       let factory: ComponentFactory<ShowdstComponent> =
         this.resolver.resolveComponentFactory(ShowdstComponent);

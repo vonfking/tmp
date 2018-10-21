@@ -1,24 +1,23 @@
-<form nz-form (ngSubmit)="submitForm()">
+<nz-content style="background:#fff; padding: 24px; min-height: 500px;">
+  <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
   <nz-form-item>
-    <nz-form-label [nzSpan]="2" nzRequired nzFor="tenantid">TenantID</nz-form-label>
+    <nz-form-label [nzSpan]="5" nzRequired nzFor="tenantid">TenantID</nz-form-label>
     <nz-form-control [nzSpan]="12">
-      <input type="text" nz-input formControlName="tenantid" placeholder="Please input tenant id">
+      <input type="text" nz-input formControlName="tenantId" placeholder="Please input tenant id">
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="2" nzFor="dsaid" >DSAID</nz-form-label>
+    <nz-form-label [nzSpan]="5" nzFor="dsaid" >DSAID</nz-form-label>
     <nz-form-control [nzSpan]="12">
-      <input type="text" nz-input formControlName="dsaid" placeholder="Please input dsa id">
+      <input type="text" nz-input formControlName="dsaId" placeholder="Please input dsa id">
     </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="2" nzFor="search" ></nz-form-label>
-    <nz-form-control [nzSpan]="12">
+    <nz-form-control [nzOffset]="19">
       <button nz-button (click)="Search()">Search</button>
     </nz-form-control>
   </nz-form-item>
 </form>
-<nz-table #nzTable [nzData]="dataSet" [nzPageSize]="50" [nzScroll]="{x: '1300px', y: '240px' }">
+<div class="search-result-list">
+<nz-table #nzTable [nzData]="dataSet"  [nzScroll]="{x: '1300px', y: '240px' }">
   <thead>
     <tr>
       <th>TENANTID</th>
@@ -56,3 +55,5 @@
     </tr>
   </tbody>
 </nz-table>
+</div>
+</nz-content>

@@ -1,0 +1,7 @@
+export class tabs {
+    userCode: string;
+    userName: string;
+    token: string;
+    menus: Array<Menu>;
+    permissions: Array<Permission>;
+}

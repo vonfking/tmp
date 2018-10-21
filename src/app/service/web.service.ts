@@ -24,11 +24,11 @@ export class WebService {
   execMML(mml: string) {
     //const url = "http://10.43.214.204:8888/mml?mml=" + mml;
     const url = "/mml?mml=" + mml;
-    return this.http.get(url)
-      .toPromise()
-      .then(res => res.json())
-      .catch(this.handleError);
-    //return this.httpClient.get(url, this.httpOptions);
+    //return this.http.get(url)
+    //  .toPromise()
+    //  .then(res => res.json())
+    //  .catch(this.handleError);
+    return this.httpClient.get(url, this.httpOptions);
   }
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only   

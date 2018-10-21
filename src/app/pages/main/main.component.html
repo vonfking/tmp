@@ -25,8 +25,8 @@
       <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
         <ng-template #titleTemplate>
           <div>
-            {{ tab }}
-            <i class="anticon anticon-close" (click)="closeTab(tab)"></i>
+            {{ tab.name }}
+            <i class="anticon anticon-close" (click)="closeTab(tab.name)"></i>
           </div>
         </ng-template>
         <ng-template #tabContainer></ng-template>

@@ -1,18 +1,5 @@
 'use strict';
 
-var tipc = require('./addon/tipc.node');
-var resp
-tipc.init("10.43.214.204", 0x1101, function(evid, msg, length) {
-	var result = []
-	var nodes = msg.match('STATUS=(.*),SYS_VERSION')[1].split('&')
-	for (var i in nodes)
-	{
-		result.push(nodes[i].split('-'));
-	}
-	console.log(result)
-	resp.send(result);
-});
-
 var PORT   = 8888;
 
 var express    = require('express');
@@ -36,6 +23,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+/*
 app.get('/', function (req, res) {
   console.log("url:%s, user:%s, id:%d", req.url, req.session.user, req.session.id)
   if(req.session.user)
@@ -50,7 +38,8 @@ app.get('/usmclient', function (req, res) {
   else
     res.redirect('login');
 });
-app.get('/login', function (req, res) {
+*/
+app.get('/', function (req, res) {
   console.log("url:%s(get), user:%s, id:%d", req.url, req.session.user, req.session.id)
   res.sendFile( __dirname + "/" + "views/login.html" );
 });
@@ -60,21 +49,21 @@ app.post('/login', function (req, res, next) {
   if (req.body.user == "admin" && req.body.pass == "admin")
   {
     req.session.user = req.body.user;
-    res.sendStatus(200); // equivalent to res.status(200).send('OK')
+    //res.sendStatus(200); // equivalent to res.status(200).send('OK')
+    res.send(req.body)
   }
   else
 	res.sendStatus(403); // equivalent to res.status(403).send('Forbidden')
 });
 app.get('/mml', function (req, res, next) {
   console.log("url:%s, user:%s, id:%d", req.url, req.session.user, req.session.id)
-  var commid = 0x3B0007E9
-  var jno    = 0xc8001		
-  var evid   = 1561
-  resp = res
-  if (req.query.mml.search(":") > 0)
-    tipc.sendmsg(commid, jno, evid, '30002/35|COMM_1::DDM\n   '+req.query.mml+',SYS_VERSION="master",SYS_RESULT="0",SYS_CMDCODE="1170600",SYS_SESSIONID="10001",SYS_SEQUENCEID="524651",SYS_USERID="254",SYS_USERNAME="",SYS_NETYPE="1",SYS_TERMTYPE="3",SYS_ISTRANS="0",SYS_PATH="/",SYS_ISDISP="0",SYS_DISPMODE="0",SYS_LASTPACK="1",SYS_WRITELOG="0",SYS_IP="10.43.144.194",SYS_APPMODE="CUDR-NF_10-43-214-184.Ncudr_SystemManagement_0.ddm",SYS_ACCTYPE="0",SYS_UP="S_LC"-"en_US",SYS_TID="1539409721727524651",SYS_AUTHCODE="6424ecafd55dc3a274cfa29b00babd08",SYS_NFID="d6cc5cbb-aa55-4058-96aa-be0a2bd6b8ff"')
-  else
-    tipc.sendmsg(commid, jno, evid, '30002/35|COMM_1::DDM\n   '+req.query.mml+':SYS_VERSION="master",SYS_RESULT="0",SYS_CMDCODE="1170600",SYS_SESSIONID="10001",SYS_SEQUENCEID="524651",SYS_USERID="254",SYS_USERNAME="",SYS_NETYPE="1",SYS_TERMTYPE="3",SYS_ISTRANS="0",SYS_PATH="/",SYS_ISDISP="0",SYS_DISPMODE="0",SYS_LASTPACK="1",SYS_WRITELOG="0",SYS_IP="10.43.144.194",SYS_APPMODE="CUDR-NF_10-43-214-184.Ncudr_SystemManagement_0.ddm",SYS_ACCTYPE="0",SYS_UP="S_LC"-"en_US",SYS_TID="1539409721727524651",SYS_AUTHCODE="6424ecafd55dc3a274cfa29b00babd08",SYS_NFID="d6cc5cbb-aa55-4058-96aa-be0a2bd6b8ff"')
+  var result = [
+    [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+    [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  ]
+
+	console.log(result)
+	res.send(result);  
 });
 app.get('/getevent', function (req, res, next) {
   console.log("url:%s, user:%s, id:%d", req.url, req.session.user, req.session.id)
