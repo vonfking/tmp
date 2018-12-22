@@ -10,12 +10,12 @@ var identityKey = 'skey';
 var session = require('express-session');
 app.use(session({
   name: identityKey,
-  secret: 'usmclient', // 用来对session id相关的cookie进行签名
-  saveUninitialized: false, // 是否自动保存未初始化的会话，建议false
-  resave: false, // 是否每次都重新保存会话，建议false
+  secret: 'usmclient', 
+  saveUninitialized: false, 
+  resave: false, 
   //expires: 0,
   cookie: {
-    maxAge: 1000 * 1000 // 有效期，单位是毫秒,负数表示临时cookie，只对本窗口有效
+    maxAge: 1000 * 1000 
   }
 }));
 
