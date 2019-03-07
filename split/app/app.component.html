@@ -1,0 +1,24 @@
+<div class="layout">
+	<div class="header">header</div>
+	<div class="body">
+        <as-split [direction]="direction" gutterSize="5" useTransition="true">
+            <div as-split-area size="10" minSize="5" maxSize="30" closable="'true'">
+                <p>part1</p>
+            </div>
+            <as-split-area>
+                <p>part2</p>
+            </as-split-area>
+            <as-split-area>
+                <as-split [direction]="'vertical'">
+                    <as-split-area>
+                        <p>part3</p>
+                    </as-split-area>
+                    <as-split-area size="30" minSize="10" maxSize="50" closable="'true'">
+                        <p>part4</p>
+                    </as-split-area>
+                </as-split>      
+            </as-split-area>
+        </as-split>
+	</div>
+	<div class="footer">footer</div>
+</div>
